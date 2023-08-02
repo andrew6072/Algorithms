@@ -21,8 +21,6 @@ addWord()
 4) If the input key is a prefix of the existing key in Trie, Simply mark the last node of
    the key as the end of a word.
 """
-
-
 def addWord(root, s):
     temp = root
     for ch in s:
@@ -108,17 +106,19 @@ def printWord(root, s):
         printWord(root.child[ch], s + ch)
 
 
-root = TrieNode()
-addWord(root, "bigo")
-addWord(root, "then")
-addWord(root, "big")
-addWord(root, "the")
-addWord(root, "github")
+# Examples
+if __name__ == "__main__":
+    root = TrieNode()
+    addWord(root, "bigo")
+    addWord(root, "then")
+    addWord(root, "big")
+    addWord(root, "the")
+    addWord(root, "github")
 
-printWord(root, "")
+    printWord(root, "")
 
-word_to_remove = "the"
-removeWord(root, word_to_remove, 0, len(word_to_remove))
+    word_to_remove = "the"
+    removeWord(root, word_to_remove, 0, len(word_to_remove))
 
-print("\nAfter remove:")
-printWord(root, "")
+    print("\nAfter remove:")
+    printWord(root, "")
