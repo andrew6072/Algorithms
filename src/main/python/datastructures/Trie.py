@@ -55,10 +55,12 @@ def removeWord(root, s, level, len):
 
     """
     Case 1: The word to be removed is an independent word. Its deletion does not affect any other words in the Trie.
-    If level == len, it means that we have successfully traversed to the last character of this word in this Trie, 
-    also means that we have found the word to be removed in this Trie, but do not delete it yet, we mark the isEndOfWord
-    attribute to False for deleting later.
+    Case 2: The word to be removed is a prefix of another word. Ex: we wan to remove 'abc' from a Trie that has 'abcd'
+    Case 3: The word to be removed contains another word. Ex: remove 'abcd' from a Trie that has 'abc'
     
+    If level == len, it means that we have successfully traversed to the last character of this word in this Trie, 
+    also means that we have found the word to be removed in this Trie, but do not delete it yet, we mark the 
+    attribute 'isEndOfWord' to False for deleting later.
     """
     if level == len:
         if root.isEndOfWord:
@@ -69,19 +71,29 @@ def removeWord(root, s, level, len):
     ch = s[level]
 
     """
-    If we cannot find the next char in Trie, then stop traverse.
+    If we cannot find the next char in Trie (which means this word to be removed is not in the Trie), 
+    then stop traverse.
     """
     if ch not in root.child:
         return False
 
     """
-    This flag is attached with a node, it indicates if a node is in the word to be deleted or not.
+    This flag is attached with a node, it indicates if a node is in the word to be removed or not.
     """
     flag = removeWord(root.child[ch], s, level + 1, len)
 
+    """
+    If this char is supposed to be removed (flag == True);
+    
+    and this char is not the ending of any word (we dont want to remove the words that is prefix 
+    of the word that we want to be removed -> Case2);
+    
+    and this char has no child (which means this word is not prefix of any word -> Case3 & Case1), 
+    then OK, we can remove this char.
+    """
     if (
         flag == True
-        and isWord(root.child[ch]) == False
+        and root.child[ch].isEndOfWord == False
         and isEmpty(root.child[ch]) == True
     ):
         del root.child[ch]
@@ -102,7 +114,11 @@ addWord(root, "then")
 addWord(root, "big")
 addWord(root, "the")
 addWord(root, "github")
+
 printWord(root, "")
-removeWord(root, "githubbg", 0, 6)
+
+word_to_remove = "the"
+removeWord(root, word_to_remove, 0, len(word_to_remove))
+
 print("\nAfter remove:")
 printWord(root, "")
