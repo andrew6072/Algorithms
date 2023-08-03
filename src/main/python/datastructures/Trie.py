@@ -21,6 +21,8 @@ addWord()
 4) If the input key is a prefix of the existing key in Trie, Simply mark the last node of
    the key as the end of a word.
 """
+
+
 def addWord(root, s):
     temp = root
     for ch in s:
