@@ -80,7 +80,6 @@ def deleteNode(root, x):
             del root
             return temp
 
-
         temp = minValueNode(root.right)
 
         root.key = temp.key
@@ -121,6 +120,40 @@ def rotateRight(root, pivot):  # O(1)
     root.left = maxValueNode(pivot)
     pivot.right = root
     root = pivot
+    return root
+
+
+# Convert BST to array by in-order
+def treeToArray(root, nodes):
+    treeToArray(root.left, nodes)
+    nodes.append(root.data)
+    treeToArray(root.right, nodes)
+
+
+# Function converts a sorted array to BST
+def sortedArrayToBST(arr):  # O(N)
+    """
+    1) Set The middle element of the array as root.
+    2) Recursively do the same for the left half and right half.
+        Get the middle of the left half and make it the left child of the root created in step 1.
+        Get the middle of the right half and make it the right child of the root created in step 1.
+    """
+    if not arr:
+        return None
+    mid = len(arr) // 2
+    root = Node(arr[mid])
+    # left subtree has all value < arr[mid]
+    root.left = sortedArrayToBST(arr[:mid])
+    # right subtree has all value > arr[mid]
+    root.right = sortedArrayToBST(arr[mid + 1 :])
+    return root
+
+
+# Build a balanced tree from a BST
+def buildBalancedTree(self, root):
+    nodes = []
+    treeToArray(root, nodes)
+    root = sortedArrayToBST(nodes)
     return root
 
 
