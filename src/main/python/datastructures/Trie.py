@@ -102,7 +102,7 @@ def removeWord(root, s, level, len):
 
 
 def printWord(root, s):
-    if isWord(root):
+    if root.isEndOfWord:
         print(s)
     for ch in root.child:
         printWord(root.child[ch], s + ch)
