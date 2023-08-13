@@ -21,10 +21,15 @@ def prims(graph, path, visited, dist, src):
     pq = queue.PriorityQueue()
     pq.put(Node(src, 0))
     dist[src] = 0
+
     while pq.empty() == False:
         top = pq.get()
         u = top.id
         visited[u] = True
+
+        if top.cost != dist[u]:
+            continue
+
         for neighbor in graph[u]:
             v = neighbor.id
             w = neighbor.cost
