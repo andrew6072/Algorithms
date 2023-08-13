@@ -1,3 +1,5 @@
+# Prim's algorithm for finding minimum spanning tree
+
 import queue
 
 INF = 10e9
