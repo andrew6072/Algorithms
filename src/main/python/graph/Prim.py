@@ -40,6 +40,13 @@ def prims(graph, path, visited, dist, src):
 
 
 def printMST(dist, path, n):
+    for i in range(n):
+        if path[i] == -1:
+            continue
+        print(f'{path[i]} - {i}: {dist[i]}')
+
+
+def lenMST(dist, path, n):
     ans = 0
     for i in range(n + 1):
         if path[i] == -1:
