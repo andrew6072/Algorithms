@@ -1,4 +1,4 @@
-# Dijkstra algorithm for finding shortest paths from one node to all other nodes in a
+# Dijkstra algorithm O(Elog(V)) for finding shortest paths from one node to all other nodes in a
 # weighted and non-negative weight graph.
 
 import queue

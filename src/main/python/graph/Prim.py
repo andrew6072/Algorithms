@@ -1,4 +1,4 @@
-# Prim's algorithm for finding minimum spanning tree
+# Prim's algorithm O(Elog(V)) for finding minimum spanning tree
 
 import queue
 
